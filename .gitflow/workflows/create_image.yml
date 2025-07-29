@@ -22,4 +22,4 @@ jobs:
     - name: Build the Docker image
       run: export VERSION=$(jq -r .version package.json) && docker build . --file Dockerfile --tag ${{ vars.DOCKERHUB_USERNAME }}/node-app:$VERSION.$GITHUB_RUN_ID
     - name: Push to Docker Hub
-      run: export VERSION=$(jq -r .vesrion package.json) && docker push ${{ vars.DOCKERHUB_USERNAME }}/node-app:$VERSION.$GITHUB_RUN_ID
+      run: export VERSION=$(jq -r .version package.json) && docker push ${{ vars.DOCKERHUB_USERNAME }}/node-app:$VERSION.$GITHUB_RUN_ID
