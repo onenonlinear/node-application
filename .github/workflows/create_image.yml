@@ -23,3 +23,14 @@ jobs:
       run: export VERSION=$(jq -r .version package.json) && docker build . --file Dockerfile --tag ${{ vars.DOCKERHUB_USERNAME }}/node-app:$VERSION.$GITHUB_RUN_ID
     - name: Push to Docker Hub
       run: export VERSION=$(jq -r .version package.json) && docker push ${{ vars.DOCKERHUB_USERNAME }}/node-app:$VERSION.$GITHUB_RUN_ID
+  
+  helm:
+    runs-on: vte-labs
+    environment: development
+    needs: build
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check k8s Cluster info
+      run: export KUBECONFIG=$(${{ vars.KUBECONFIG_PATH }}.kube/config) && kubectl cluster-info
+      
+     
