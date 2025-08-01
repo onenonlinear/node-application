@@ -31,5 +31,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Check k8s Cluster info
-      # run: export KUBECONFIG=$(${{ vars.KUBECONFIG_PATH }}.kube/config) && kubectl cluster-info
-      run: export KUBECONFIG=${{ vars.KUBECONFIG_PATH }}.kube/config && id -u && ls -la $KUBECONFIG
+      run: export KUBECONFIG=${{ vars.KUBECONFIG_PATH }}.kube/config && kubectl cluster-info
