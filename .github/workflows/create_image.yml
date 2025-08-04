@@ -32,3 +32,5 @@ jobs:
     - uses: actions/checkout@v4
     - name: Check k8s Cluster info
       run: export KUBECONFIG=${{ vars.KUBECONFIG_PATH }}.kube/config && kubectl cluster-info
+    - name: Upgrade application
+      run: export VERSION=$(jq -r .version package.json) && export KUBECONFIG=${{ vars.KUBECONFIG_PATH }}.kube/config && helm upgrade vte-way --set image_tag=$VERSION.$GITHUB_RUN_ID ${{ vars.KUBECONFIG_PATH }}vte/devops-vte/node-app-chart -n vte-labs
